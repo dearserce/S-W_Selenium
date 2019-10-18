@@ -41,7 +41,7 @@ public class Login{
 	}
 	
 	//Methods
-	public void LoginEn(String email, String password, boolean remember) {
+	public void LoginToSystem(String email, String password, boolean remember) {
 		weCorreo = utilities.create(inptCorreo);
 		weCorreo.clear();
 		weCorreo.sendKeys(email);
@@ -67,6 +67,44 @@ public class Login{
 		
 	}
 	
+	//Set only email
+	public void setEmail(String email) {
+		weCorreo = utilities.create(inptCorreo);
+		weCorreo.clear();
+		weCorreo.sendKeys(email);
+	}
+	//set only password
+	public void setPassword(String password) {
+		wePassword = utilities.create(inptPassword);
+		wePassword.clear();
+		wePassword.sendKeys(password);
+	}
+	//Set only remember me checkbox
+	public void setRememberMeCheckbox(boolean bol) {
+		weRemember = utilities.create(inptRemember);
+		if(bol) {
+			//Means you want to activate checkbox
+			if(!utilities.isCheckboxSelected(weRemember)) {
+				weRemember.click();				
+			}
+		}else {
+			//Means you dont want to activate checkbox
+			//So we have to be secure that is not selected
+			if(utilities.isCheckboxSelected(weRemember)) {
+				weRemember.click();
+			}
+		}
+	}
+	//click on submit button
+	public void clickSubmitOnly() {
+		utilities.clickOnElement(btnSubmit);
+	}
+	
+	//Click on forgot password
+	public void clickForgotPassword() {
+		utilities.clickOnElement(aForgotPassword);
+	}
+	
 	//Getters for later comparison
 	public By getLblIniciarSesion() {
 		return lblIniciarSesion;
@@ -87,7 +125,5 @@ public class Login{
 	public By getLblRemember() {
 		return lblRemember;
 	}
-	
-	
 	
 }
