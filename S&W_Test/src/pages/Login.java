@@ -24,6 +24,7 @@ public class Login{
 	private final By lblRemember 				= By.xpath("//label[@for=\"RememberMe\"]");
 	
 	private final By inptCorreo 				= By.xpath("//input[@class=\"form-control\" and @id=\"Email\"]");
+	
 	private final By inptPassword 				= By.xpath("//input[@class=\"form-control\" and @id=\"Password\"]");
 	private final By inptRemember 				= By.xpath("//input[@id=\"RememberMe\" and @type=\"checkbox\"]");
 	
@@ -38,10 +39,13 @@ public class Login{
 	
 	public Login(WebDriver driver) {
 		this.driver = driver;
+		utilities = new Utilities(this.driver);
 	}
 	
 	//Methods
 	public void LoginToSystem(String email, String password, boolean remember) {
+		try{
+		
 		weCorreo = utilities.create(inptCorreo);
 		weCorreo.clear();
 		weCorreo.sendKeys(email);
@@ -64,6 +68,11 @@ public class Login{
 		
 		weSubmit = utilities.create(btnSubmit);
 		weSubmit.click();
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Login error: "+e);
+		}
 		
 	}
 	
