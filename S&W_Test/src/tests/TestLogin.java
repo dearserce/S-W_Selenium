@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import common.Utilities;
+import data.Data;
 import pages.Login;
 
 public class TestLogin{
@@ -18,6 +19,7 @@ public class TestLogin{
 	WebDriver driver;
 	Utilities util;
 	Login login;
+	Data data;
 	
 	@Before
 	public void setup() {
@@ -30,7 +32,7 @@ public class TestLogin{
 			driver = new ChromeDriver();			 
 			driver.manage().window().maximize();
 			driver.manage().deleteAllCookies();
-		
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -39,7 +41,9 @@ public class TestLogin{
 	}
 	
 	@Test
-	public void test(){
+	public void LoginHappyPath(){
+			data = new Data("Login"); //sheet
+			
 			driver.get(Login.url); //Static final url, expected.
 			login = new Login(driver); //Telling Login class we are going to use the same driver.
 			login.LoginToSystem(
@@ -47,7 +51,6 @@ public class TestLogin{
 				   	"Compe1234*", 
 					true);
 			Assert.assertTrue("https://test.scorenwod.com/",true);
-
 	}
 	
 	@After
