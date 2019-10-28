@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import common.Utilities;
 
-public class Login{
+public class LoginPage{
 
 	WebDriver driver;
 	Utilities utilities;
@@ -37,7 +37,7 @@ public class Login{
 	private WebElement weRemember;
 	private WebElement weSubmit;
 	
-	public Login(WebDriver driver) {
+	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 		utilities = new Utilities(this.driver);
 	}

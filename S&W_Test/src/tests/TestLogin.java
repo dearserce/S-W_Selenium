@@ -2,6 +2,7 @@ package tests;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -12,14 +13,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import common.Utilities;
 import data.Data;
-import pages.Login;
+import data.Objects.Login;
+import pages.LoginPage;
 
 public class TestLogin{
 
 	WebDriver driver;
 	Utilities util;
-	Login login;
+	LoginPage loginPage;
 	Data data;
+	Login login;
 	
 	@Before
 	public void setup() {
@@ -42,15 +45,22 @@ public class TestLogin{
 	
 	@Test
 	public void LoginHappyPath(){
+		try {
 			data = new Data("Login"); //sheet
+			driver.get(LoginPage.url); //Static final url, expected.
+			loginPage = new LoginPage(driver); //Telling Login class we are going to use the same driver.
+			login = data.getValuesFromId("T1");
+			loginPage.LoginToSystem(
+					login.getUsername(), 
+				   	login.getPassword(), 
+					login.getRememberMe());
+			Assert.assertTrue(login.getExpectedResult(),true);
 			
-			driver.get(Login.url); //Static final url, expected.
-			login = new Login(driver); //Telling Login class we are going to use the same driver.
-			login.LoginToSystem(
-					"test@scorenwod.com", 
-				   	"Compe1234*", 
-					true);
-			Assert.assertTrue("https://test.scorenwod.com/",true);
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong while testing");
+		}
+			
 	}
 	
 	@After

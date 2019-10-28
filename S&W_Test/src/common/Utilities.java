@@ -45,8 +45,6 @@ public class Utilities {
 		try {
 			webElem= wait.until(ExpectedConditions.visibilityOfElementLocated(e));
 		}catch(Exception ex) {
-			System.out.println("qpdo qpedo D;");
-			System.out.println(e);
 			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 		}
