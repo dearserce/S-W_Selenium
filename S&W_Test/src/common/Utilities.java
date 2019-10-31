@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Utilities {
 
 	public static String CHROME_DRIVER_PATH = "C:\\selenium\\chromedriver_win32\\chromedriver.exe";
+	public static String FILE_PATH = "D:\\Users\\franc\\Documents\\NYL Trainee Docs\\Score&Wod\\Data\\TestCasesValues.xlsx";
+	
 	WebDriver driver;
 	WebDriverWait wait;
 	
@@ -76,5 +78,6 @@ public class Utilities {
 			return "webdriver.chrome.driver";
 		}
 	}
+
 	
 }

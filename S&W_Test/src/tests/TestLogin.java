@@ -2,9 +2,6 @@ package tests;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import common.Utilities;
 import data.Data;
+import data.ObjectMethods.LoginDataMethods;
 import data.Objects.Login;
 import pages.LoginPage;
 
@@ -46,19 +44,27 @@ public class TestLogin{
 	@Test
 	public void LoginHappyPath(){
 		try {
-			data = new Data("Login"); //sheet
+			String testCaseID = "T1"; //We can make this dynamic
+			System.out.println("Testing ["+testCaseID+"] test case");
+			data = new LoginDataMethods("Login", Utilities.FILE_PATH); //sheet
 			driver.get(LoginPage.url); //Static final url, expected.
+			System.out.println("URL :" +LoginPage.url);
+			System.out.println();
 			loginPage = new LoginPage(driver); //Telling Login class we are going to use the same driver.
-			login = data.getValuesFromId("T1");
+			login = (Login) data.getValuesFromId(testCaseID); //Casting to object we want to use
+			System.out.println("Using next values: \n" + login.getUsername() + "\n" + login.getPassword() + "\n" + login.getRememberMe());
 			loginPage.LoginToSystem(
 					login.getUsername(), 
 				   	login.getPassword(), 
 					login.getRememberMe());
-			Assert.assertTrue(login.getExpectedResult(),true);
+			
+			String URL = driver.getCurrentUrl();
+			Assert.assertEquals(URL, login.getExpectedResult());
+			System.out.println("Test Passed");
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("Something went wrong while testing");
+			System.out.println("Test Failed");
 		}
 			
 	}
