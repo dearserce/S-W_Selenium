@@ -42,22 +42,21 @@ public class TestLogin{
 	}
 	
 	@Test
-	public void LoginHappyPath(){
+	public void CorrectLoginRememberTrue(){
 		try {
 			String testCaseID = "T1"; //We can make this dynamic
-			System.out.println("Testing ["+testCaseID+"] test case");
+			System.out.println("Testing ["+testCaseID+"]:");
 			data = new LoginDataMethods("Login", Utilities.FILE_PATH); //sheet
 			driver.get(LoginPage.url); //Static final url, expected.
-			System.out.println("URL :" +LoginPage.url);
-			System.out.println();
 			loginPage = new LoginPage(driver); //Telling Login class we are going to use the same driver.
 			login = (Login) data.getValuesFromId(testCaseID); //Casting to object we want to use
-			System.out.println("Using next values: \n" + login.getUsername() + "\n" + login.getPassword() + "\n" + login.getRememberMe());
+			System.out.println(login.getTestCase());
+			System.out.println("Values: \n" + login.getUsername() + "\n" + login.getPassword() + "\n" + login.getRememberMe());
 			loginPage.LoginToSystem(
 					login.getUsername(), 
 				   	login.getPassword(), 
 					login.getRememberMe());
-			
+			System.out.println();
 			String URL = driver.getCurrentUrl();
 			Assert.assertEquals(URL, login.getExpectedResult());
 			System.out.println("Test Passed");
@@ -66,8 +65,35 @@ public class TestLogin{
 			e.printStackTrace();
 			System.out.println("Test Failed");
 		}
-			
 	}
+	
+	@Test
+	public void CorrectLoginRememberFalse(){
+		try {
+			String testCaseID = "T2"; //We can make this dynamic
+			System.out.println("Testing ["+testCaseID+"]:");
+			data = new LoginDataMethods("Login", Utilities.FILE_PATH); //sheet
+			driver.get(LoginPage.url); //Static final url, expected.
+			loginPage = new LoginPage(driver); //Telling Login class we are going to use the same driver.
+			login = (Login) data.getValuesFromId(testCaseID); //Casting to object we want to use
+			System.out.println(login.getTestCase());
+			System.out.println("Values: \n" + login.getUsername() + "\n" + login.getPassword() + "\n" + login.getRememberMe());
+			loginPage.LoginToSystem(
+					login.getUsername(), 
+				   	login.getPassword(), 
+					login.getRememberMe());
+			System.out.println();
+			String URL = driver.getCurrentUrl();
+			Assert.assertEquals(URL, login.getExpectedResult());
+			System.out.println("Test Passed");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Test Failed");
+		}
+	}
+	
+	
 	
 	@After
 	public void after() {

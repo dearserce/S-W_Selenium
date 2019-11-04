@@ -10,6 +10,7 @@ public abstract class Data {
 //This method will return every value matched with the id
 	public abstract Object getValuesFromId(String tid);
 
+
 //This method will return every value in the file
 	public ArrayList<String> getAllValues() {
 		ArrayList<String> allValues = new ArrayList<String>();
